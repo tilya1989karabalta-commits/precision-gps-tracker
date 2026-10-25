@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="description" content="Professional high-accuracy GPS Location Sharing App">
+    <title>Precision GPS | Так Жайгашкан Жер</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                    <line x1="12" y1="18" x2="12" y2="22"></line>
+                    <line x1="2" y1="12" x2="6" y2="12"></line>
+                    <line x1="18" y1="12" x2="22" y2="12"></line>
+                </svg>
+                <span>Precision GPS</span>
+            </div>
+            <div class="header-actions">
+                <button id="btn-admin" class="btn-icon" title="Админ">⚙</button>
+                <button id="btn-share" class="btn-primary">Бөлүшүү</button>
+            </div>
+        </header>
+
+        <!-- Map -->
+        <div id="map"></div>
+
+        <!-- Status Panel -->
+        <div class="status-panel">
+            <div class="status-item">
+                <span class="label">Статус</span>
+                <span id="status" class="value">Издөө...</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Тактык</span>
+                <span id="accuracy" class="value">—</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Координат</span>
+                <span id="coords" class="value">—</span>
+            </div>
+            <div class="status-item">
+                <span class="label">Бийиктик</span>
+                <span id="altitude" class="value">—</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="btn-locate" class="btn-main">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                </svg>
+                Менин жерим
+            </button>
+            <button id="btn-follow" class="btn-secondary">Көзөмөлдөө</button>
+            <button id="btn-copy" class="btn-secondary">Копиялоо</button>
+        </div>
+
+        <!-- Share Modal -->
+        <div id="share-modal" class="modal hidden">
+            <div class="modal-content">
+                <h3>Жайгашкан жерди бөлүшүү</h3>
+                <p>Бул шилтемени башкаларга жөнөтсөңүз, алар сиздин учурдагы жериңизди көрө алышат (уруксат менен).</p>
+                <input type="text" id="share-link" readonly>
+                <div class="modal-actions">
+                    <button id="btn-copy-link" class="btn-primary">Шилтемени көчүрүү</button>
+                    <button id="btn-close-share" class="btn-secondary">Жабуу</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Modal -->
+        <div id="admin-modal" class="modal hidden">
+            <div class="modal-content admin-panel">
+                <h3>Админ панел</h3>
+                <div class="admin-info">
+                    <p><strong>Админ:</strong> Сиз</p>
+                    <p><strong>Телефон / MBank:</strong> 0556-652-652</p>
+                    <p><strong>Төлөм:</strong> MBank аркылуу сатып алуу ушул номерге түшөт</p>
+                </div>
+                <div class="form-group">
+                    <label>Админ сырсөз (өзгөртүү үчүн)</label>
+                    <input type="password" id="admin-pass" placeholder="Жаңы сырсөз">
+                </div>
+                <div class="form-group">
+                    <label>Колдонуучу аты</label>
+                    <input type="text" id="admin-name" value="Admin" placeholder="Админ аты">
+                </div>
+                <div class="modal-actions">
+                    <button id="btn-save-admin" class="btn-primary">Сактоо</button>
+                    <button id="btn-close-admin" class="btn-secondary">Жабуу</button>
+                </div>
+                <p class="note">Бул тиркеме consent-based. Башкаларды уруксатсыз көзөмөлдөө мүмкүн эмес.</p>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="toast hidden"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
